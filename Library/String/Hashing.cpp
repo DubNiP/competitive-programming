@@ -1,16 +1,3 @@
-#include <bits/stdc++.h>
-#define f first
-#define s second
-#define push_back pb
-#define int ll
-using namespace std;
-using ll = long long;
-
-using vi = vector<int>;
-using vb = vector<bool>;
-using ii = pair<int,int>;
-using vvi = vector<vi>;
-
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 inline int get_rand_base(int mod) {
@@ -33,7 +20,7 @@ struct DoubleHash {
         for (int i = 0; i < n; i++) {
             h1[i + 1] = (h1[i] * BASE1 + s[i]) % MOD1;
             h2[i + 1] = (h2[i] * BASE2 + s[i]) % MOD2;
-
+            
             p1[i + 1] = (p1[i] * BASE1) % MOD1;
             p2[i + 1] = (p2[i] * BASE2) % MOD2;
         }
@@ -41,31 +28,10 @@ struct DoubleHash {
 
     pair<int, int> get(int l, int r) {
         int len = r - l + 1;
-
+        
         int val1 = (h1[r + 1] - (h1[l] * p1[len]) % MOD1 + MOD1) % MOD1;
         int val2 = (h2[r + 1] - (h2[l] * p2[len]) % MOD2 + MOD2) % MOD2;
-
+        
         return {val1, val2};
     }
 };
-
-
-
-void solve(){
-
-    string s; cin>>s;
-    DoubleHash h(s);
-    int i,n=s.size();
-    for(i=0;i<n-1;i++){
-        if(h.get(0,i)==h.get(n-i-1,n-1)) cout<<i+1<<" ";
-    }
-}
-
-signed main() {
-    ios_base::sync_with_stdio(0); cin.tie(0);
-    solve();
-
-
-    return 0;
-}
-

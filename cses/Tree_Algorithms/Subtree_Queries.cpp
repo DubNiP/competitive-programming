@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define int long long
 #define f first
 #define s second
 #define pb push_back
@@ -15,14 +16,14 @@ struct SegTree {
 
     struct Node {
         //Caso queira mudar, mude a info aqui.
-        int mini = 1e9;
+        int sum = 0;
         
         static Node combine(const Node& a, const Node& b) {
-            return {min(a.mini,b.mini)};
+            return {a.sum + b.sum};
         }
         
         void apply(int v) {
-            mini = v;
+            sum = v;
         }
     };
 
@@ -62,18 +63,48 @@ struct SegTree {
 
 
 
-void solve(){
 
-    int n,q; cin>>n>>q;
-    SegTree s(n);
-    vi v(n); for(auto &w : v) cin>>w;
-    s.build(v);
+
+vvi adj;
+vi val;
+vi v;
+vector<ii> pos;
+
+void dfs(int i,int ant){
+    pos[i].f=val.size();
+    val.pb(v[i]);
+    for(auto w : adj[i]) if(w!=ant) dfs(w,i);
+    pos[i].s=val.size();
+    val.pb(0);
+}
+
+void solve(){
+    int i,n,q; cin>>n>>q;
+    v=vi(n); for(auto &w : v) cin>>w;
+    adj=vvi(n);
+    pos=vector<ii>(n);
+
+    for(i=0;i<n-1;i++){
+        int a,b; cin>>a>>b; a--;b--;
+        adj[a].pb(b);
+        adj[b].pb(a);
+    }
+    dfs(0,-1);
+    SegTree tree((int)val.size());
+    tree.build(val);
 
     while(q--){
-        int a,b,c; cin>>a>>b>>c;
-        if(a==1) s.update(b-1,c);
-        else cout<<(s.query(b-1,c)).mini<<"\n";
+        int a,b; cin>>a>>b;
+        if(a==1){
+            int c; cin>>c;
+            tree.update(pos[b-1].f,c);
+        }
+        else cout<<tree.query(pos[b-1].f,pos[b-1].s).sum<<endl;
     }
+
+    
+
+
 }
 
 signed main() {

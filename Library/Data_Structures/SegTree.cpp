@@ -1,28 +1,15 @@
-#include <bits/stdc++.h>
-#define f first
-#define s second
-#define pb push_back
-#define endl "\n"
-using namespace std;
-
-using ll = long long;
-using vi = vector<int>;
-using vb = vector<bool>;
-using ii = pair<int,int>;
-using vvi = vector<vector<int>>;
-
 struct SegTree {
 
     struct Node {
         //Caso queira mudar, mude a info aqui.
-        int mini = 1e9;
+        int sum = 0;
         
         static Node combine(const Node& a, const Node& b) {
-            return {min(a.mini,b.mini)};
+            return {a.sum + b.sum};
         }
         
         void apply(int v) {
-            mini = v;
+            sum = v;
         }
     };
 
@@ -59,27 +46,3 @@ struct SegTree {
         return Node::combine(resL, resR);
     }
 };
-
-
-
-void solve(){
-
-    int n,q; cin>>n>>q;
-    SegTree s(n);
-    vi v(n); for(auto &w : v) cin>>w;
-    s.build(v);
-
-    while(q--){
-        int a,b,c; cin>>a>>b>>c;
-        if(a==1) s.update(b-1,c);
-        else cout<<(s.query(b-1,c)).mini<<"\n";
-    }
-}
-
-signed main() {
-    ios_base::sync_with_stdio(0); cin.tie(0);
-    solve();
-
-
-    return 0;
-}
