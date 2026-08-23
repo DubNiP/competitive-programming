@@ -3,33 +3,35 @@
 #define f first
 #define s second
 #define pb push_back
-#define all(x) x.begin(),x.end()
+#define all(x) x.begin(), x.end()
+
 #define sz(x) (int)(x).size()
 #define endl "\n"
 using namespace std;
-
-using ll = long long;
 using vi = vector<int>;
 using vb = vector<bool>;
 using ii = pair<int,int>;
 using vvi = vector<vector<int>>;
 
 
-int lis(const vi& a){
-    vi dp;
-    for(int x : a){
-        auto it=lower_bound(all(dp),x);
-        if(it == dp.end()) dp.pb(x);
-        else *it = x;
-    }
-    return sz(dp);
-}
-
+const int INF = 2e18;
+const int MOD = 1e9+7;
 
 void solve(){
-    int n; cin>>n;
-    vi v(n); for(auto &w : v) cin>>w;
-    cout<<lis(v)<<endl;
+
+    int i,n; cin>>n;
+    vector<ii> v(n);
+    for(auto &[a,b] : v) cin>>b>>a;
+    sort(all(v));
+    int ult=-1;
+    int resp=0;
+    for(i=0;i<n;i++){
+        if(ult<=v[i].s){
+            resp++;
+            ult=v[i].f;
+        }
+    }
+    cout<<resp<<endl;
 
 }
 

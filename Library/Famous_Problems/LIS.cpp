@@ -1,5 +1,4 @@
-//TESTAR
-int lis(const vi& a) {
+int lis( vi& a ) {
     vi dp;
     for (int x : a) {
         auto it = lower_bound(all(dp), x);
