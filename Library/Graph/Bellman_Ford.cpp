@@ -7,7 +7,7 @@ struct BellmanFord {
     BellmanFord(int n) : n(n), dist(n + 1, INF), pai(n + 1, -1) {}
 
     void add_edge(int u, int v, int w) {
-        edges.push_back({u, v, w});
+        edges.pb({u, v, w});
     }
     
     bool run(int z) {

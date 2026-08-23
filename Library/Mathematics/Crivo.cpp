@@ -1,18 +1,16 @@
 vi sieve(int n) {
-    vb is_prime(n + 1, true);
-    is_prime[0] = is_prime[1] = false;
+    vi prim;
+    vi lp(n + 1, 0); 
     
-    for (int i = 2; i * i <= n; i++) {
-        if (is_prime[i]) {
-            for (int j = i * i; j <= n; j += i) is_prime[j] = false;
+    for (int i = 2; i <= n;i++) {
+        if (lp[i] == 0) {
+            lp[i] = i;
+            primes.pb(i);
+        }
+        for (int p : primes) {
+            if (p > lp[i] || i * p > n) break;
+            lp[i * p] = p;
         }
     }
-    
-    vi primes;
-    for (int i = 2; i <= n; i++) {
-        if (is_prime[i]) {
-            primes.push_back(i);
-        }
-    }
-    return primes;
-}   //TESTAR
+    return prim;
+} 
