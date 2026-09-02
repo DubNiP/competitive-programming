@@ -2,7 +2,7 @@ struct DSU {
     vi p,sz;
     DSU(int n) {
         p.resize(n);
-        iota(p.begin(),p.end(),0);
+        iota(all(p),0);
         sz.assign(n,1);
     }
     int find(int i) {

@@ -5,4 +5,4 @@ void compress(vi& a) {
     
     for (int& x : a) 
         x = lower_bound(all(b), x) - b.begin(); 
-}
+}  //N LOG N

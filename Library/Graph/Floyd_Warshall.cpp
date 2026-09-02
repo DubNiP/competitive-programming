@@ -1,4 +1,3 @@
-//TESTAR
 void floyd_warshall(int n, vector<vector<long long>>& dist) {
     
     for (int k = 0; k < n; k++)

@@ -1,5 +1,3 @@
-//TESTAR
-
 struct Dijkstra {
     vi dist;
     

@@ -1,4 +1,3 @@
-// NAO TESTADO E CONHECIMENTO BAIXO
 struct SparseTable {
     int n, K;
     vector<vector<ii>> st;

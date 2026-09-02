@@ -2,15 +2,12 @@ struct Matrix {
     int r, c;
     vvi mat;
     
-    Matrix(int r, int c) : r(r), c(c) {
-        mat.assign(r, vi(c, 0));
-    }
-    
+    Matrix(int r, int c) : r(r), c(c) {mat.assign(r, vi(c, 0));} 
     Matrix(int n) : r(n), c(n) {
         mat.assign(n, vi(n, 0));
         for (int i = 0; i < n; i++) mat[i][i] = 1;
     }
-    
+ 
     Matrix operator*(const Matrix &other) const {
         Matrix res(r, other.c);
         for (int i = 0; i < r; i++) {
