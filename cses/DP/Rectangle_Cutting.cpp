@@ -17,17 +17,32 @@ using vvi = vector<vector<int>>;
 const int INF = 2e18;
 const int MOD = 1e9+7;
 
+vvi tab;
+
+void calc(int a,int b){
+
+    int i,j,k;
+    for(i=1;i<=a;i++){
+        for(j=1;j<=b;j++){
+            if(j==i){
+                tab[i][i]=0;
+                continue;
+            }
+            for(k=1;k<i;k++)
+                tab[i][j]=min(tab[i][j],tab[k][j]+tab[i-k][j]+1);
+            for(k=1;k<j;k++)
+                tab[i][j]=min(tab[i][j],tab[i][k]+tab[i][j-k]+1);
+        }
+    }
+}
+
 void solve(){
 
-    int a,b,resp=0; cin>>a>>b;
-    if(a<b) swap(a,b);
-    while(a!=b){
-        a-=b;
-        if(a<b) swap(a,b);
-        resp++;
-    }
-    cout<<resp;
-
+    int i,a,b,resp=0; cin>>a>>b;
+    if(b>a) swap(a,b);
+    tab=vvi(a+1,vi(b+1,INF));
+    calc(a,b);
+    cout<<tab[a][b]<<endl;
 }
 
 signed main() {
