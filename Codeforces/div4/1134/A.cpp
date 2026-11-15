@@ -17,38 +17,17 @@ const int inf=2e18;
 const int MOD=1e9+7;
 
 void solve() {
-    int n,i; cin>>n;
-    vi v(n); for(auto &w : v) cin>>w;
-    vi sor=v;
-    sort(all(sor));
-    vi ps1(n+1), ps2(n+1);
-    ps1[0]=ps2[0]=0;
-
-    for(i=1;i<=n;i++){
-        ps1[i]=ps1[i-1]+v[i-1];
-        ps2[i]=ps2[i-1]+sor[i-1];
+    int a,b,c; cin>>a>>b>>c;
+    if(a+1==b && b+1==c){
+        cout<<"YES\n";
     }
-    int q; cin>>q;
-    while(q--){
-        int a,l,r; cin>>a>>l>>r;
-        if(a==1) cout<<ps1[r]-ps1[l-1]<<endl;
-        else cout<<ps2[r]-ps2[l-1]<<endl;
-    }
+    else cout<<"NO\n";
 }
 
 signed main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
     int q = 1;
-    //cin >> q;
+    cin >> q;
     while(q--) solve();
     return 0;
-}
-
-
-
-
-
-
-void f(vector<int> v) {
-    cout<<"Oi gente tudo bem?"<<endl;
 }

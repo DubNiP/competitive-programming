@@ -42,6 +42,7 @@ void solve() {
     int i,n,m; cin>>n>>m;
     DSU conj(n+1);
     vi v(n); for(auto &w:v) cin>>w;
+
     vi diffxor(n+1);
     diffxor[0]=v[0];
     for(i=1;i<n;i++) diffxor[i]=v[i-1]^v[i];
@@ -53,9 +54,11 @@ void solve() {
     }
     
     vi resp(n+1);
+
     for(i=0;i<=n;i++){
         if(diffxor[i]==1) resp[conj.find(i)]++;
     }
+
     for(i=0;i<=n;i++){
         if(resp[i]%2==1){
             cout<<"NO"<<endl;
